@@ -1,0 +1,77 @@
+/*algo de estilos basicos, no es necesario borrar esta parte*/
+body{
+    background-color: antiquewhite;
+}
+.contenedor{
+    border-radius: 30px;
+    border: 1px solid black;
+    width: 40vw;
+    height:90vh;
+    margin: auto;
+    margin-top: 5vh;
+}
+.pantalla{
+    background-color: gray;
+    height: 15%;
+    width: 90%;
+    margin: auto;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    border-radius: 10px 40px 40px 10px;
+}
+
+
+/* estilos, posicionamiento de divs y botones */
+.botones{
+    /* definimos tamaño, color y posicionamos */
+    width: 94%;
+    height: 70%;
+    margin: auto;
+
+    /* definimos de que forma se ordenaran los
+    elementos hijos */
+    display: grid;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 15px;
+
+    /* ajustamos el tamaño de las filas y las columnas
+    como querramos*/
+    grid-template-rows: 25% auto;
+    grid-template-columns: 70% auto;
+}/* div padre */
+.botones>div{
+    /* ajustamos algunos estilos visualmene agradables
+    para el usuario */
+    background-color: blueviolet;
+    border: solid 1px;
+    border-radius: 10px;
+    padding: 17px;
+
+    /* todos los botones se posicionaran de forma cimetrica */
+    display: grid;
+}/*  div hijos */
+.operadores{
+    /* desde que columna y fila inicia y cuantas ocupan */
+    grid-column: 1 / span 2;
+    grid-row: 1;
+
+    /* posicionar los elemntos hijos */
+    gap: 7%;
+    grid-template-columns: repeat(4,1fr);
+} /*hijo de la fila superior*/
+.numeros{
+    grid-template-columns: repeat(3,1fr);
+    gap: 10px;
+}/*hijo inferior izquierdo*/
+.controles{
+    gap: 20px;
+    padding: 300px;
+}/*hijo inferior derecho*/
+button{
+    padding: 10px;
+}/*tamaños y estilos de los botones*/
+.button0{
+    grid-column: 1 / span 2;
+    grid-row: 4;
+}/*boton especial porque ocupa 2 columnas*/
