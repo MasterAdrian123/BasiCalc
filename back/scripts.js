@@ -2,6 +2,7 @@ const operadores = document.querySelector(".operadores");
 const numeros = document.querySelector(".numeros");
 const controles = document.querySelector(".controles");
 const output = document.getElementById('output');
+const expresion = document.getElementById('expresion');
 
 //evitamos con esta variable que se digite un numero con varios "." ej: (2 * 1.2.3) 
 var esPunto;
@@ -51,6 +52,8 @@ const visualizarSigno = signo =>{
 //limpia lo que contega la pantalla
 const limpiar = () =>{
     output.textContent = '';
+    expresion.textContent='';
+    esPunto = false;
 }
 
 // elimina el ultimo elemento de la pantalla
@@ -58,13 +61,83 @@ const deshacer = () =>{
     output.textContent = output.textContent.slice(0,-1);
 }
 
+//identifica que es un numero y que es un signo y lo asigna a una lista
+const identificador = () => {
+    let lista = []
+    let numero = '';
+    for(let i of output.textContent){
+        if(i==='+' || i==='-' || i==='*' || i=== '/'){
+            lista.push(numero);
+            lista.push(i),
+            numero = '';
+        }else{
+            numero+= i;
+        }
+    }
+    lista.push(numero);
+    return lista;
+}
+
+//funcion creada para realizar la suma de una expresion matematica
+const sumar = lista =>{
+    let esSuma = false;
+    let esResta = false;
+    let respuesta;
+    for(let i of lista){
+        let numero = Number(i);
+        if(esSuma || esResta){
+            if(esSuma){
+                respuesta += numero;
+                esSuma = false;   
+            }else{
+                respuesta -= numero;
+                esResta = false;
+            }
+            continue;
+        }
+        if(i==='+' || i==='-'){
+            (i==='+') ? esSuma=true : esResta=true;
+        }else{
+            respuesta = numero;
+        }
+    }
+    return respuesta;
+}
+
+// funcion que ejecuta los procesos logicomatematicos
+const calculadora = () => {
+    let pantalla = identificador();
+    let lista = [];
+    let esMultiplicacion = false;
+    let esDivision = false;
+
+    for(let i of pantalla){
+        if(esMultiplicacion || esDivision){
+            if(esMultiplicacion){
+                esMultiplicacion= false;
+                lista.push(lista.pop() * i);
+            }else{
+                esDivision = false;
+                lista.push(lista.pop() / i);
+            }
+            continue;
+        }
+        if(i==='*' || i==='/'){
+            (i==='*') ? esMultiplicacion=true : esDivision=true;
+            continue;
+        }
+        lista.push(i);
+    }
+    return sumar(lista);
+}
+
 // inicia los procesos para obtener el resultado matematico
 const respuesta = () =>{
     if(esSigno()){
         alert("no puedes terminar la expresion con un signo");
     }else{
-        alert("aun no se ha finalizado esta funcion, proximamente...")
-        limpiar();
+        expresion.textContent = output.textContent;
+        output.textContent = calculadora();
     }
 }
 
@@ -113,4 +186,5 @@ const iniciar = () =>{
         }
     }
 }
+//iniciamos todos los botones
 iniciar();

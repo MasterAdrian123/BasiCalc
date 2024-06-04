@@ -21,6 +21,7 @@ body{
 }
 
 /* estilos, posicionamiento de divs y botones */
+
 .botones{
     /* definimos tamaño, color y posicionamos */
     width: 94%;
@@ -46,7 +47,6 @@ body{
     border: solid 1px;
     border-radius: 10px;
     padding: 17px;
-
     /* todos los botones se posicionaran de forma cimetrica */
     display: grid;
 }/*  div hijos */
@@ -74,3 +74,24 @@ button{
     grid-column: 1 / span 2;
     grid-row: 4;
 }/*boton especial porque ocupa 2 columnas*/
+button{
+    font-size: 25px;
+}/* estilos aplicados al boton en especifico*/
+
+/*estilos a los numeros de la pantalla*/
+#output, #expresion{
+    display: block;
+    height: 35%;
+    margin: 1% 5%;
+    padding: 2px;
+}
+
+#output{
+    font-size: 40px;
+    text-align: end;
+}
+
+#expresion{
+    font-size: 20px;
+    text-align: start;
+}
